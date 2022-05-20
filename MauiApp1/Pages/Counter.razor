@@ -53,19 +53,19 @@
             var y1 = y;
 
             if (x1 < 0 || y1 > width)
-                x1 *= -1;
+                x1 = 0;
             if (y < 0 || y1 > height)
-                y1 *= -1;
+                y1 = 0;
 
             if (x1 < 0)
-                x1 += 0 - x1;
+                x1 = 0;
             else if (x1 > width)
-                x1 -= x1 - width;
+                x1 = width;
 
             if (y1 < 0)
-                y1 += 0 - y1;
+                y1 = 0;
             if (y1 > height)
-                y1 -= y1 - height;
+                y1 -= height;
 
             r.X = x1;
             r.Y = y1;
