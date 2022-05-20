@@ -1,0 +1,77 @@
+﻿@page "/counter"
+
+@using System.Globalization
+@using MauiApp1.Data
+
+@inject IJSRuntime JSRuntime
+@inject MainViewModel MainViewModel;
+
+<h3>Movement</h3>
+
+<div>OverChild: @MainViewModel.OverChild</div>
+
+<div>Cursor Position: @MainViewModel.ContainerMouseX,@MainViewModel.ContainerMouseY</div>
+
+<div>Element Id:
+    @if (MainViewModel.SelectedItem > -1) 
+    { @MainViewModel.SelectedItem <span> Element Position:</span>  @MainViewModel.ElementX <span>,</span>@MainViewModel.ElementY } 
+    else 
+    { <span>none</span> }
+</div>
+
+<svg 
+     @onmousemove="@MouseMove"
+     
+     class="MainSVG" width="1000" height="1000" style="background:rgb(187, 255, 255)">
+
+    @foreach (Rectangle r in MainViewModel.Rectangles)
+    {
+        <RectangleComponent DataContext="r" ChangeSelected="@ChangeSelected" />
+    }
+
+</svg>
+
+@code
+{
+    public void MouseMove(MouseEventArgs e)
+    {
+        MainViewModel.ContainerMouseX = (int)e.ClientX - MainViewModel.ContainerX;
+        MainViewModel.ContainerMouseY = (int)e.ClientY - MainViewModel.ContainerY;
+
+        if(MainViewModel.SelectedItem > -1)
+        {
+            var r = MainViewModel.Rectangles[MainViewModel.SelectedItem-1];
+            var x = MainViewModel.ContainerMouseX - r.OriginalX;
+            var y = MainViewModel.ContainerMouseY - r.OriginalY;
+
+            r.X = x;
+            r.Y = y;
+
+            MainViewModel.ElementX = x;
+            MainViewModel.ElementY = y;
+
+        }
+    }
+
+    public async void ChangeSelected(string newselected)
+    {
+        //Set an SVG <g> Element over Top in the <svg>
+         //method contained in _Host.cshtml
+        await JSRuntime.InvokeAsync<string>("PlaceOnTop", new object[] { newselected });
+        base.StateHasChanged();
+    }
+
+    //This is called after OnInitialized
+    protected override async void OnAfterRender(bool firstRender)
+    {
+        if(firstRender)
+        {
+            //Get SVG Position and Pass to the ViewModel 
+            //method contained in _Host.cshtml
+            var raw = await JSRuntime.InvokeAsync<decimal[]>("ContainerPos", null);
+            MainViewModel.ContainerX = (int)raw[0];
+            MainViewModel.ContainerY = (int)raw[1];
+        }
+        base.OnAfterRender(firstRender);
+    }
+}
