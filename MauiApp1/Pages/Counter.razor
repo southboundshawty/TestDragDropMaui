@@ -46,11 +46,32 @@
             var x = MainViewModel.ContainerMouseX - r.OriginalX;
             var y = MainViewModel.ContainerMouseY - r.OriginalY;
 
-            r.X = x;
-            r.Y = y;
+            var width = 3000;
+            var height = 3000;
 
-            MainViewModel.ElementX = x;
-            MainViewModel.ElementY = y;
+            var x1 = x;
+            var y1 = y;
+
+            if (x1 < 0 || y1 > width)
+                x1 *= -1;
+            if (y < 0 || y1 > height)
+                y1 *= -1;
+
+            if (x1 < 0)
+                x1 += 0 - x1;
+            else if (x1 > width)
+                x1 -= x1 - width;
+
+            if (y1 < 0)
+                y1 += 0 - y1;
+            if (y1 > height)
+                y1 -= y1 - height;
+
+            r.X = x1;
+            r.Y = y1;
+
+            MainViewModel.ElementX = x1;
+            MainViewModel.ElementY = y1;
 
         }
     }
