@@ -51,6 +51,17 @@
             var x = MainViewModel.ContainerMouseX - r.OriginalX;
             var y = MainViewModel.ContainerMouseY - r.OriginalY;
 
+            var d = MainViewModel.CanvasElements
+                .Where(x => x.Id != r.Id)
+                .Any(a => 
+                    new Rect(a.X, a.Y, a.Width, a.Height)
+                    .IntersectsWith(new Rect(x, y, r.Width, r.Height)));
+
+            if(d)
+            {
+                return;
+            }
+
             if (x < 0)
                 x = 0;
             if (x > Width - r.Width)

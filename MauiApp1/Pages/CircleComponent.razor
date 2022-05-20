@@ -13,6 +13,36 @@
     @onmouseup="MouseUp" 
     @onmouseout="MouseOut">
     <div style="background-color:red;
-    width:200px;
-    height:200px;"></div>
+    width:100px;
+    height:100px;">
+        @Date
+    </div>
 </div>
+
+@code {
+    public string Date { get; set; }
+
+    private object _locker = new object();
+
+    private async Task Time()
+    {
+        while(true)
+        {
+            lock(_locker)
+            {
+                Date = DateTime.Now.ToLongTimeString();
+            }
+            await Task.Delay(200);
+        }
+    }
+
+    protected override async void OnAfterRender(bool firstRender)
+    {
+        if(firstRender)
+        {
+            Time();
+        }
+
+        base.OnAfterRender(firstRender);
+    }
+}
