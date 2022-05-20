@@ -19,25 +19,19 @@
     { <span>none</span> }
 </div>
 
-<div class="MainSVG" style="background-color: red; width: 3000px;height:3000px;position: relative;overflow:auto;"
+<div class="MainSVG" style="background-color: lightblue; width: 3000px;height:3000px;position: relative;overflow:auto;"
     @onmousemove="@MouseMove">
-    @foreach (Rectangle r in MainViewModel.Rectangles)
+    @foreach (var r in MainViewModel.CanvasElements)
     {
-        <RectangleComponent DataContext="r" ChangeSelected="@ChangeSelected" />
+        if(r.Id % 2 == 0)
+        {
+            <RectangleComponent DataContext="r" ChangeSelected="@ChangeSelected" />
+        } else
+        {
+            <CircleComponent DataContext="r" ChangeSelected="@ChangeSelected" />
+        }
     }
 </div>
-
-@*<div 
-     @onmousemove="@MouseMove"
-     
-     class="MainSVG" width="2000" height="2000" style="background:rgb(187, 255, 255)">
-
-    @foreach (Rectangle r in MainViewModel.Rectangles)
-    {
-        <RectangleComponent DataContext="r" ChangeSelected="@ChangeSelected" />
-    }
-
-</div>*@
 
 @code
 {
@@ -48,7 +42,7 @@
 
         if(MainViewModel.SelectedItem > -1)
         {
-            var r = MainViewModel.Rectangles[MainViewModel.SelectedItem-1];
+            var r = MainViewModel.CanvasElements[MainViewModel.SelectedItem-1];
             var x = MainViewModel.ContainerMouseX - r.OriginalX;
             var y = MainViewModel.ContainerMouseY - r.OriginalY;
 

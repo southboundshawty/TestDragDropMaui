@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MauiApp1.Data
+﻿namespace MauiApp1.Data
 {
     public class MainViewModel
     {
@@ -16,7 +10,7 @@ namespace MauiApp1.Data
         public int ContainerMouseY { get; set; } = 0;
         public bool OverChild { get; set; } = false;
         public int SelectedItem { get; set; } = -1;
-        public List<Rectangle> Rectangles { get; set; }
+        public List<ICanvasElement> CanvasElements { get; set; }
         public MainViewModel()
         {
             Initialize();
@@ -25,23 +19,20 @@ namespace MauiApp1.Data
         {
             Random rnd = new Random();
 
-            Rectangles = new List<Rectangle>();
+            CanvasElements = new List<ICanvasElement>();
 
             for (int i = 0; i < 10; i++)
             {
-                var r = new Rectangle
+                var r = new CanvasElementBase
                 {
-                    RectangleId = i + 1,
+                    Id = i + 1,
                     X = (int)rnd.Next(0, 600),
                     Y = (int)rnd.Next(0, 600),
                     Width = 20 * (int)rnd.Next(5, 10),
-                    Height = 20 * (int)rnd.Next(5, 10),
-                    R = rnd.Next(0, 255),
-                    G = rnd.Next(0, 255),
-                    B = rnd.Next(0, 255),
+                    Height = 20 * (int)rnd.Next(5, 10)
                 };
 
-                Rectangles.Add(r);
+                CanvasElements.Add(r);
             }
         }
     }

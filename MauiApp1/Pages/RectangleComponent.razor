@@ -1,84 +1,13 @@
-﻿@using MauiApp1.Data
+﻿@inherits CanvasComponent
 @inject IJSRuntime JSRuntime
-@inject MainViewModel MainViewModel;
 
-<div style="background:rgb(@DataContext.R,@DataContext.G,@DataContext.B);width:300px;height:300px;top: @(DataContext.Y + "px"); left: @(DataContext.X + "px");position: absolute" 
-@onmousemove="MouseMove" 
-          @onmousedown="MouseDown"
-          @onmouseup="MouseUp" 
-          @onmouseout="MouseOut"></div>
-
-@*<div style="background:rgb(@DataContext.R,@DataContext.G,@DataContext.B);
-            cursor:@pointer;
-            margin-top:@DataContext.X;
-            margin-left:@DataContext.Y;
-            position:relative;
-            width:@DataContext.Width px;
-            height:@DataContext.Height px" 
-          @onmousemove="MouseMove" 
-          @onmousedown="MouseDown"
-          @onmouseup="MouseUp" 
-          @onmouseout="MouseOut"/>
-*@
-@*<g id="@($"Item{DataContext.RectangleId}")">
-
-    <rect style="fill:rgb(@DataContext.R,@DataContext.G,@DataContext.B);cursor:@pointer;" 
-          @onmousemove="MouseMove" 
-          @onmousedown="MouseDown"
-          @onmouseup="MouseUp" 
-          @onmouseout="MouseOut"
-          width="@DataContext.Width" height="@DataContext.Height"
-          x="@DataContext.X" y="@DataContext.Y" />
-
-    <text style="pointer-events: none; -webkit-user-select: none; 
--moz-user-select: none; -ms-user-select: none;  user-select: none;" 
-          x="@(DataContext.X + 4)" y="@(DataContext.Y + 20)" fill="black">@DataContext.Position</text>*@
-
-@*</g>*@
-
-@code {
-
-    [Parameter] public Action<string> ChangeSelected { get; set; }
-
-    [Parameter] public Rectangle DataContext { get; set; }
-
-    #region Cursor Pointer Movement
-    //all-scroll
-    [Parameter] public string pointer { get; set; } = "pointer";
-    #endregion
-
-    #region Mouse Events
-
-    public void MouseDown(MouseEventArgs e)
-    {
-        if (MainViewModel.SelectedItem == -1)
-        {
-            DataContext.OriginalX = (int)e.ClientX - DataContext.X - MainViewModel.ContainerX;
-            DataContext.OriginalY = (int)e.ClientY - DataContext.Y - MainViewModel.ContainerY;
-
-            MainViewModel.SelectedItem = DataContext.RectangleId;
-            ChangeSelected?.Invoke($"Item{DataContext.RectangleId}");
-        }
-    }
-
-    public void MouseUp(MouseEventArgs args)
-    {
-        if (MainViewModel.SelectedItem == DataContext.RectangleId)
-        {
-            MainViewModel.SelectedItem = -1;
-        }
-    }
-
-    public void MouseOut(MouseEventArgs e)
-    {
-        MainViewModel.OverChild = false;
-    }
-
-    public void MouseMove(MouseEventArgs e)
-    {
-        MainViewModel.OverChild = true;
-    }
-   
-    #endregion
-
-}
+<div style="background-color: black;
+    width:300px;
+    height:300px;
+    top: @(DataContext.Y + "px");
+    left: @(DataContext.X + "px");
+    position: absolute" 
+    @onmousemove="MouseMove" 
+    @onmousedown="MouseDown"
+    @onmouseup="MouseUp" 
+    @onmouseout="MouseOut" />
