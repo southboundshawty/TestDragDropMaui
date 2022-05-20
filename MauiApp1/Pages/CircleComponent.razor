@@ -1,0 +1,62 @@
+﻿@using MauiApp1.Data
+@inject IJSRuntime JSRuntime
+@inject MainViewModel MainViewModel;
+
+
+<div id="@($"Item{DataContext.Id}")"
+style="cursor:@pointer;background-color: red;border-radius: 30px;" 
+          @onmousemove="MouseMove" 
+          @onmousedown="MouseDown"
+          @onmouseup="MouseUp" 
+          @onmouseout="MouseOut"
+          width="@DataContext.Width" height="@DataContext.Height"
+          x="@DataContext.X" y="@DataContext.Y">
+
+</div>
+
+@code {
+
+    [Parameter] public Action<string> ChangeSelected { get; set; }
+
+    [Parameter] public ICanvasElement DataContext { get; set; }
+
+    #region Cursor Pointer Movement
+    //all-scroll
+    [Parameter] public string pointer { get; set; } = "pointer";
+    #endregion
+
+    #region Mouse Events
+
+    public void MouseDown(MouseEventArgs e)
+    {
+        if (MainViewModel.SelectedItem == -1)
+        {
+            DataContext.OriginalX = (int)e.ClientX - DataContext.X - MainViewModel.ContainerX;
+            DataContext.OriginalY = (int)e.ClientY - DataContext.Y - MainViewModel.ContainerY;
+
+            MainViewModel.SelectedItem = DataContext.Id;
+            ChangeSelected?.Invoke($"Item{DataContext.Id}");
+        }
+    }
+
+    public void MouseUp(MouseEventArgs args)
+    {
+        if (MainViewModel.SelectedItem == DataContext.Id)
+        {
+            MainViewModel.SelectedItem = -1;
+        }
+    }
+
+    public void MouseOut(MouseEventArgs e)
+    {
+        MainViewModel.OverChild = false;
+    }
+
+    public void MouseMove(MouseEventArgs e)
+    {
+        MainViewModel.OverChild = true;
+    }
+   
+    #endregion
+
+}

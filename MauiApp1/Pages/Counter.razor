@@ -19,17 +19,25 @@
     { <span>none</span> }
 </div>
 
-<svg 
+<div class="MainSVG" style="background-color: red; width: 3000px;height:3000px;position: relative;overflow:auto;"
+    @onmousemove="@MouseMove">
+    @foreach (Rectangle r in MainViewModel.Rectangles)
+    {
+        <RectangleComponent DataContext="r" ChangeSelected="@ChangeSelected" />
+    }
+</div>
+
+@*<div 
      @onmousemove="@MouseMove"
      
-     class="MainSVG" width="1000" height="1000" style="background:rgb(187, 255, 255)">
+     class="MainSVG" width="2000" height="2000" style="background:rgb(187, 255, 255)">
 
     @foreach (Rectangle r in MainViewModel.Rectangles)
     {
         <RectangleComponent DataContext="r" ChangeSelected="@ChangeSelected" />
     }
 
-</svg>
+</div>*@
 
 @code
 {
@@ -57,7 +65,7 @@
     {
         //Set an SVG <g> Element over Top in the <svg>
          //method contained in _Host.cshtml
-        await JSRuntime.InvokeAsync<string>("PlaceOnTop", new object[] { newselected });
+        //await JSRuntime.InvokeAsync<string>("PlaceOnTop", new object[] { newselected });
         base.StateHasChanged();
     }
 
