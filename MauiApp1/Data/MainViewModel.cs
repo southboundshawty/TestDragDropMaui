@@ -21,15 +21,18 @@
 
             CanvasElements = new List<ICanvasElement>();
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 3; i++)
             {
+                var width = 200;
+                var heigth = 200;
+
                 var r = new CanvasElementBase
                 {
                     Id = i + 1,
-                    X = (int)rnd.Next(0, 600),
-                    Y = (int)rnd.Next(0, 600),
-                    Width = 20 * (int)rnd.Next(5, 10),
-                    Height = 20 * (int)rnd.Next(5, 10)
+                    X = (int)rnd.Next(0, 1000 - width),
+                    Y = (int)rnd.Next(0, 1000 - heigth),
+                    Width = 200,
+                    Height = 200
                 };
 
                 CanvasElements.Add(r);
