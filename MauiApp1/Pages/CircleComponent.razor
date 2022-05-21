@@ -36,11 +36,11 @@
         }
     }
 
-    protected override async void OnAfterRender(bool firstRender)
+    protected override void OnAfterRender(bool firstRender)
     {
         if(firstRender)
         {
-            Time();
+            Task.Run(Time);
         }
 
         base.OnAfterRender(firstRender);
