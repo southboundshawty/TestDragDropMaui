@@ -15,8 +15,8 @@
 <div>Cursor Position: @MainViewModel.ContainerMouseX,@MainViewModel.ContainerMouseY</div>
 
 <div>Element Id:
-    @if (MainViewModel.SelectedItem > -1) 
-    { @MainViewModel.SelectedItem <span> Element Position:</span>  @MainViewModel.ElementX <span>,</span>@MainViewModel.ElementY } 
+    @if (MainViewModel.SelectedItem != null) 
+    { @MainViewModel.SelectedItem.Id <span> Element Position:</span>  @MainViewModel.SelectedItem.X <span>,</span>@MainViewModel.SelectedItem.Y } 
     else 
     { <span>none</span> }
 </div>
@@ -45,9 +45,9 @@
         MainViewModel.ContainerMouseX = (int)e.ClientX - MainViewModel.ContainerX;
         MainViewModel.ContainerMouseY = (int)e.ClientY - MainViewModel.ContainerY;
 
-        if(MainViewModel.SelectedItem > -1)
+        if(MainViewModel.SelectedItem != null)
         {
-            var r = MainViewModel.CanvasElements[MainViewModel.SelectedItem-1];
+            var r = MainViewModel.SelectedItem;
             var x = MainViewModel.ContainerMouseX - r.OriginalX;
             var y = MainViewModel.ContainerMouseY - r.OriginalY;
 
@@ -70,9 +70,6 @@
 
             r.X = x;
             r.Y = y;
-
-            MainViewModel.ElementX = x;
-            MainViewModel.ElementY = y;
         }
     }
 

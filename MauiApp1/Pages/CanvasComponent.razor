@@ -7,31 +7,23 @@
 
     [Parameter] public ICanvasElement DataContext { get; set; }
 
-    #region Cursor Pointer Movement
-    //all-scroll
-    [Parameter] public string pointer { get; set; } = "pointer";
-    #endregion
-
     #region Mouse Events
 
     public void MouseDown(MouseEventArgs e)
     {
-        if (MainViewModel.SelectedItem == -1)
+        if (MainViewModel.SelectedItem == null)
         {
             DataContext.OriginalX = (int)e.ClientX - DataContext.X - MainViewModel.ContainerX;
             DataContext.OriginalY = (int)e.ClientY - DataContext.Y - MainViewModel.ContainerY;
 
-            MainViewModel.SelectedItem = DataContext.Id;
+            MainViewModel.SelectedItem = DataContext;
             ChangeSelected?.Invoke($"Item{DataContext.Id}");
         }
     }
 
     public void MouseUp(MouseEventArgs args)
     {
-        if (MainViewModel.SelectedItem == DataContext.Id)
-        {
-            MainViewModel.SelectedItem = -1;
-        }
+        MainViewModel.SelectedItem = null;
     }
 
     public void MouseOut(MouseEventArgs e)
