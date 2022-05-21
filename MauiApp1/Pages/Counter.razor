@@ -77,7 +77,7 @@
     {
         //Set an SVG <g> Element over Top in the <svg>
          //method contained in _Host.cshtml
-        //await JSRuntime.InvokeAsync<string>("PlaceOnTop", new object[] { newselected });
+        await JSRuntime.InvokeAsync<string>("PlaceOnTop", new object[] { newselected });
         base.StateHasChanged();
     }
 

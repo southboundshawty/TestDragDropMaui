@@ -19,7 +19,7 @@
 
             CanvasElements = new List<ICanvasElement>();
 
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 5; i++)
             {
                 var width = 200;
                 var heigth = 200;

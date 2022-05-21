@@ -38,10 +38,10 @@
 			element.parentNode.removeChild(element);
 		}
 
-		window.PlaceOnTop = (elementId) => {
+        window.PlaceOnTop = (elementId) => {
 			var element = document.getElementById(elementId);
-			element.parentNode.appendChild(element);
-		}
+			element.style.zIndex += "1";
+        }
 	</script>
 </body>
 

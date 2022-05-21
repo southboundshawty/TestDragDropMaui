@@ -1,7 +1,9 @@
 ﻿@inherits CanvasComponent
 @inject IJSRuntime JSRuntime
 
-<div style="background-color: black;
+<div 
+    id="@($"Item{DataContext.Id}")"
+    style="background-color: black;
     width:200px;
     height:200px;
     top: @(DataContext.Y + "px");
