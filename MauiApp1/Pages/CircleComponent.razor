@@ -1,11 +1,12 @@
 ﻿@inherits CanvasComponent
 @inject IJSRuntime JSRuntime
+@inject AdornerComponent Adorner;
 
 <div 
     id="@($"Item{DataContext.Id}")"
     style="background-color:darkblue;
-    width:200px;
-    height:200px;
+    width:@(DataContext.Width + "px");
+    height:@(DataContext.Height + "px");
     top: @(DataContext.Y + "px");
     left: @(DataContext.X + "px");
     position: absolute;
@@ -17,7 +18,10 @@
     <div style="background-color:red;
     width:100px;
     height:100px;">
+    <AdornerComponent CanvasComponent=@this>
         @Date
+
+</AdornerComponent>
     </div>
 </div>
 
