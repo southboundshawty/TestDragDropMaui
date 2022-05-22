@@ -1,6 +1,5 @@
 ﻿@inherits CanvasComponent
 @inject IJSRuntime JSRuntime
-@inject AdornerComponent Adorner;
 
 <div 
     id="@($"Item{DataContext.Id}")"
@@ -15,14 +14,10 @@
     @onmousedown="MouseDown"
     @onmouseup="MouseUp" 
     @onmouseout="MouseOut">
-    <div style="background-color:red;
-    width:100px;
-    height:100px;">
-    <AdornerComponent CanvasComponent=@this>
-        @Date
-
-</AdornerComponent>
-    </div>
+        <span style="font-size: 23pt; color:white; display:flex; align-items: center;
+  justify-content: center;">
+            @Date
+        </span>
 </div>
 
 @code {

@@ -51,6 +51,7 @@
 
 	<ItemGroup>
 	  <PackageReference Include="Blazor.Extensions.Canvas" Version="1.1.1" />
+	  <PackageReference Include="BlazorStrap" Version="5.0.105.4262022" />
 	</ItemGroup>
 
 </Project>

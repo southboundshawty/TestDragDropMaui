@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components.WebView.Maui;
 using MauiApp1.Data;
 using MauiApp1.Pages;
+using BlazorStrap;
 
 namespace MauiApp1;
 
@@ -22,7 +23,8 @@ public static class MauiProgram
 #endif
 
 		builder.Services.AddSingleton<MainViewModel>();
-		builder.Services.AddTransient<AdornerComponent>();
+
+        builder.Services.AddBlazorStrap();
 
         return builder.Build();
 	}

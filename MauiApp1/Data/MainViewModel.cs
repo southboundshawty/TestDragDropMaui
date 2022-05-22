@@ -29,7 +29,7 @@
                     Id = i + 1,
                     X = (int)rnd.Next(0, 1000 - width),
                     Y = (int)rnd.Next(0, 1000 - heigth),
-                    Width = 200,
+                    Width = 400,
                     Height = 200
                 };
 

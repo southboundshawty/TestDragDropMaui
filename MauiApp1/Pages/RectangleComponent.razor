@@ -1,10 +1,10 @@
 ﻿@inherits CanvasComponent
 @inject IJSRuntime JSRuntime
+@using BlazorStrap;
 
 <div 
     id="@($"Item{DataContext.Id}")"
-    style="background-color: black;
-    width:@(DataContext.Width + "px");
+    style="width:@(DataContext.Width + "px");
     height:@(DataContext.Height + "px");
     top: @(DataContext.Y + "px");
     left: @(DataContext.X + "px");
@@ -12,4 +12,28 @@
     @onmousemove="MouseMove" 
     @onmousedown="MouseDown"
     @onmouseup="MouseUp" 
-    @onmouseout="MouseOut" />
+    @onmouseout="MouseOut">
+<BSCarousel HasControls="true" HasIndicators="true" >  
+    <BSCarouselItem>
+        <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Саня" preserveAspectRatio="xMidYMid slice" focusable="false">
+            <rect width="100%" height="100%" fill="#777"></rect><text x="50%" y="50%" fill="#555" dy=".3em">Саня</text>
+        </svg>
+    </BSCarouselItem>
+    <BSCarouselItem>
+        <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: долбоеб" preserveAspectRatio="xMidYMid slice" focusable="false">
+            <rect width="100%" height="100%" fill="#666"></rect><text x="50%" y="50%" fill="#444" dy=".3em">долбоеб</text>
+        </svg>
+    </BSCarouselItem>
+    <BSCarouselItem>
+        <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: внатуре" preserveAspectRatio="xMidYMid slice" focusable="false">
+            <rect width="100%" height="100%" fill="#555"></rect><text x="50%" y="50%" fill="#333" dy=".3em">внатуре</text>
+        </svg>
+    </BSCarouselItem>
+</BSCarousel>
+</div>
+
+
+
+@code {
+    public List<int> Items { get; set; } = new List<int>() { 3, 4, 9, 0, 2 };
+}
