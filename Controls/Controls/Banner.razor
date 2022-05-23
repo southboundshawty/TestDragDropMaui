@@ -2,12 +2,11 @@
 @inject IJSRuntime JSRuntime
 
 <div 
-    id="@($"Item{DataContext.Id}")"
-    style="background-color:darkblue;
-    width:@(DataContext.Width + "px");
-    height:@(DataContext.Height + "px");
-    top: @(DataContext.Y + "px");
-    left: @(DataContext.X + "px");
+    id="@($"Item{Id}")"
+    style="width:@(Width + "px");
+    height:@(Height + "px");
+    top: @(Position.Y + "px");
+    left: @(Position.X + "px");
     position: absolute;
     border-radius: 100px" 
     @onmousemove="MouseMove" 
@@ -18,9 +17,26 @@
   justify-content: center;">
             @Date
         </span>
+        <img src="@ContentUrl" style="width:@(Width + "px");
+    height:@(Height + "px");" />
 </div>
 
 @code {
+    [Parameter]
+    public string ContentUrl { get; set; }
+
+    [Parameter]
+    public int Id { get; set; }
+
+    [Parameter]
+    public int Width { get; set; }
+
+    [Parameter]
+    public int Height { get; set; }
+
+    [Parameter]
+    public Point Position { get; set; }
+
     public string Date { get; set; }
 
     private object _locker = new object();

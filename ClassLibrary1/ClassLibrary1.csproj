@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+	  <TargetFramework>net5.0</TargetFramework>
+	  <LangVersion>10.0</LangVersion>
+	  <Nullable>enable</Nullable>
+	  <ImplicitUsings>enable</ImplicitUsings>
+	  <IsPackable>true</IsPackable>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<SupportedPlatform Include="browser" />
+	</ItemGroup>
+
+	<ItemGroup Condition=" '$(TargetFramework)' == 'net5.0'  ">
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.*" />
+		<PackageReference Include="BlazorComponentUtilities" Version="1.7.1" />
+	</ItemGroup>
+	<ItemGroup Condition="  '$(TargetFramework)' == 'net6.0'  ">
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.*" />
+		<PackageReference Include="BlazorComponentUtilities" Version="1.7.1" />
+	</ItemGroup>
+</Project>

@@ -1,4 +1,8 @@
-﻿namespace MauiApp1.Data
+﻿using MauiApp1.DB;
+
+using System.Collections.Generic;
+
+namespace MauiApp1.Data
 {
     public class MainViewModel
     {
@@ -15,26 +19,29 @@
         }
         public void Initialize()
         {
-            Random rnd = new Random();
+            //Random rnd = new Random();
 
-            CanvasElements = new List<ICanvasElement>();
+            //CanvasElements = new List<ICanvasElement>();
 
-            for (int i = 0; i < 5; i++)
-            {
-                var width = 200;
-                var heigth = 200;
+            //for (int i = 0; i < 5; i++)
+            //{
+            //    var width = 200;
+            //    var heigth = 200;
 
-                var r = new CanvasElementBase
-                {
-                    Id = i + 1,
-                    X = (int)rnd.Next(0, 1000 - width),
-                    Y = (int)rnd.Next(0, 1000 - heigth),
-                    Width = 400,
-                    Height = 200
-                };
+            //    var r = new CanvasElementBase
+            //    {
+            //        Id = i + 1,
+            //        X = (int)rnd.Next(0, 1000 - width),
+            //        Y = (int)rnd.Next(0, 1000 - heigth),
+            //        Width = 400,
+            //        Height = 200
+            //    };
 
-                CanvasElements.Add(r);
-            }
+            //    CanvasElements.Add(r);
+            //}
+
+            CanvasElements = MyContext.CanvasElements;
+
         }
     }
 }

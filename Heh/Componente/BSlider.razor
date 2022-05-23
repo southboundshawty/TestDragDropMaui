@@ -1,18 +1,5 @@
-﻿@inherits CanvasComponent
-@inject IJSRuntime JSRuntime
-@using BlazorStrap;
+﻿@using BlazorStrap
 
-<div 
-    id="@($"Item{DataContext.Id}")"
-    style="width:@(DataContext.Width + "px");
-    height:@(DataContext.Height + "px");
-    top: @(DataContext.Y + "px");
-    left: @(DataContext.X + "px");
-    position: absolute" 
-    @onmousemove="MouseMove" 
-    @onmousedown="MouseDown"
-    @onmouseup="MouseUp" 
-    @onmouseout="MouseOut">
 <BSCarousel HasControls="true" HasIndicators="true" >  
     <BSCarouselItem>
         <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Саня" preserveAspectRatio="xMidYMid slice" focusable="false">
@@ -30,10 +17,13 @@
         </svg>
     </BSCarouselItem>
 </BSCarousel>
-</div>
 
-
-
+            
 @code {
-    public List<int> Items { get; set; } = new List<int>() { 3, 4, 9, 0, 2 };
+    private bool r;
+
+    [Parameter]
+    public string[] ContentUrls { get; set; }
+
+
 }

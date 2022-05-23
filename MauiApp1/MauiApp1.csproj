@@ -54,4 +54,8 @@
 	  <PackageReference Include="BlazorStrap" Version="5.0.105.4262022" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\Heh\Heh.csproj" />
+	</ItemGroup>
+
 </Project>

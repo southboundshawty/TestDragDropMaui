@@ -1,0 +1,22 @@
+﻿@using Heh.Componente
+@inherits CanvasComponent
+
+<div 
+    id="@($"Item{DataContext.Id}")"
+    style="width:@(DataContext.Width + "px");
+    height:@(DataContext.Height + "px");
+    top: @(DataContext.Y + "px");
+    left: @(DataContext.X + "px");
+    position: absolute;
+    border-radius: 100px" 
+    @onmousemove="MouseMove" 
+    @onmousedown="MouseDown"
+    @onmouseup="MouseUp" 
+    @onmouseout="MouseOut">
+    <Banner ContentUrl="@ContentUrl"/>
+</div>
+
+@code {
+    [Parameter]
+    public string ContentUrl { get; set; }
+}

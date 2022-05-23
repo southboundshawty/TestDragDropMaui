@@ -1,0 +1,63 @@
+﻿
+<div 
+    id="@($"Item{Id}")"
+    style="width:@(Width + "px");
+    height:@(Height + "px");
+    top: @(Position.Y + "px");
+    left: @(Position.X + "px");
+    position: absolute;
+    border-radius: 100px" 
+    @onmousemove="MouseMove" 
+    @onmousedown="MouseDown"
+    @onmouseup="MouseUp" 
+    @onmouseout="MouseOut">
+        <span style="font-size: 23pt; color:white; display:flex; align-items: center;
+  justify-content: center;">
+            @Date
+        </span>
+        <img src="@ContentUrl" style="width:@(Width + "px");
+    height:@(Height + "px");" />
+</div>
+
+@code {
+    [Parameter]
+    public string ContentUrl { get; set; }
+
+    [Parameter]
+    public int Id { get; set; }
+
+    [Parameter]
+    public int Width { get; set; }
+
+    [Parameter]
+    public int Height { get; set; }
+
+    [Parameter]
+    public Point Position { get; set; }
+
+    public string Date { get; set; }
+
+    private object _locker = new object();
+
+    private async Task Time()
+    {
+        while(true)
+        {
+            lock(_locker)
+            {
+                Date = DateTime.Now.ToLongTimeString();
+            }
+            await Task.Delay(200);
+        }
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if(firstRender)
+        {
+            Task.Run(Time);
+        }
+
+        base.OnAfterRender(firstRender);
+    }
+}

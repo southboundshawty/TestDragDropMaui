@@ -4,6 +4,7 @@
 @using MauiApp1.Data
 @using System.Drawing
 @using System.Diagnostics
+@using Microsoft.Maui.Graphics
 
 @inject IJSRuntime JSRuntime
 @inject MainViewModel MainViewModel;
@@ -25,12 +26,13 @@
     @onmousemove="@MouseMove">
     @foreach (var r in MainViewModel.CanvasElements)
     {
-        if(r.Id % 2 == 0)
+        @if(r is CanvasContent y)
         {
-            <RectangleComponent DataContext="r" ChangeSelected="@ChangeSelected" />
-        } else
+            <BannerComponent ContentUrl="@(y.ContentUrl)" DataContext="@r"/>
+        }
+         @if(r is CanvasMultiContent yi)
         {
-            <CircleComponent DataContext="r" ChangeSelected="@ChangeSelected" />
+            <BSliderComponent ContentUrls="@(yi.ContentUrls)" DataContext="@r"/>
         }
     }
 </div>
